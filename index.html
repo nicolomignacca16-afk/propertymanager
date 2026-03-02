@@ -15,8 +15,14 @@ html { scroll-behavior: smooth; }
 }
 body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--black); color: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-/* ── NAV ── */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 60px; background: rgba(10,10,10,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+/* ── MAIN NAV (classe specifica, non tag generico) ── */
+.main-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 60px;
+  background: rgba(10,10,10,0.94); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
 .nav-logo { overflow: hidden; width: 52px; height: 38px; flex-shrink: 0; display: block; }
 .nav-logo img { height: 38px; width: auto; display: block; max-width: none; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
@@ -102,17 +108,20 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
 
 /* ── PROOF SECTION ── */
 .proof-section { padding: 100px 60px; background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 60px; }
-.proof-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 60px; }
+.proof-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+
+/* Altezze ridotte: 180px per le card singole, 220px per quella wide */
 .proof-card img {
-  width: 100%; height: 240px;
+  width: 100%; height: 180px;
   display: block; object-fit: cover; object-position: top center;
 }
 .proof-wide { grid-column: span 2; }
-.proof-wide img { height: 300px; object-fit: cover; object-position: top center; }
-.proof-card-label { padding: 14px 20px; font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-top: 1px solid var(--border); }
-.proof-stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-.proof-stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; text-align: center; }
+.proof-wide img { height: 220px; }
+
+.proof-card-label { padding: 12px 18px; font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-top: 1px solid var(--border); }
+.proof-stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.proof-stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; }
 .proof-stat-val { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; color: var(--accent-blue); }
 .proof-stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px; }
 
@@ -135,19 +144,12 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
 .reviews-total-text { font-size: 14px; font-weight: 700; }
 .reviews-total-text span { color: var(--accent-blue); }
 
-/* ── ABOUT — foto piccola e centrata, non full-width ── */
+/* ── ABOUT ── */
 .about-section { padding: 100px 60px; background: var(--dark); border-top: 1px solid var(--border); }
-.about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 80px; align-items: start; margin-top: 60px; }
-.about-photo-wrap { position: relative; width: 300px; flex-shrink: 0; }
-.about-photo {
-  width: 100%; height: auto;
-  max-height: 340px;
-  border-radius: 16px;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-}
-.about-superhost-badge { position: absolute; bottom: -16px; right: -16px; background: var(--white); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 72px; align-items: start; margin-top: 60px; }
+.about-photo-wrap { position: relative; width: 280px; }
+.about-photo { width: 100%; max-height: 300px; border-radius: 14px; object-fit: cover; object-position: top center; display: block; }
+.about-superhost-badge { position: absolute; bottom: -14px; right: -14px; background: var(--white); border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
 .about-superhost-text { font-size: 12px; font-weight: 700; color: var(--black); line-height: 1.3; }
 .about-superhost-text small { display: block; font-size: 10px; color: #666; font-weight: 400; }
 .about-name { font-size: clamp(28px, 3vw, 42px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
@@ -165,24 +167,24 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
 
 /* ── CASE BAR ── */
 .case-bar { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 60px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
-.case-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
-.case-headline { font-size: 26px; font-weight: 800; line-height: 1.2; }
+.case-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
+.case-headline { font-size: 24px; font-weight: 800; line-height: 1.2; }
 .case-headline .up { color: var(--accent-blue); }
 .case-numbers { display: flex; gap: 48px; align-items: center; }
 .case-num { text-align: center; }
-.case-num-val { font-size: 40px; font-weight: 800; letter-spacing: -0.02em; }
+.case-num-val { font-size: 38px; font-weight: 800; letter-spacing: -0.02em; }
 .case-num-val.before { color: var(--muted); }
 .case-num-val.after { color: var(--accent-blue); }
 .case-num-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
-.case-arrow { font-size: 28px; color: var(--border); }
+.case-arrow { font-size: 24px; color: var(--border); }
 .case-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-gold); background: rgba(244,162,97,0.1); border: 1px solid rgba(244,162,97,0.25); padding: 6px 14px; border-radius: 100px; }
 
 /* ── PRICING ── */
 .pricing-strip { background: linear-gradient(135deg, rgba(58,134,255,0.06) 0%, rgba(58,134,255,0.02) 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 56px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .pricing-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 14px; }
-.pricing-title { font-size: clamp(24px, 2.5vw, 34px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+.pricing-title { font-size: clamp(22px, 2.5vw, 32px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
 .pricing-title .green { color: #4ade80; }
-.pricing-desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
+.pricing-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
 .pricing-desc strong { color: var(--off-white); }
 .pricing-right { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .pricing-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
@@ -193,26 +195,18 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
 
 /* ── FAQ ── */
 .faq-section { padding: 100px 60px; }
-.faq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
-.faq-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; transition: border-color 0.2s; }
+.faq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px; }
+.faq-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; transition: border-color 0.2s; }
 .faq-card:hover { border-color: rgba(58,134,255,0.35); }
-.faq-card-q { font-size: 15px; font-weight: 800; line-height: 1.3; margin-bottom: 16px; }
+.faq-card-q { font-size: 14px; font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
 .faq-card-q .objection { color: var(--accent-red); }
-.faq-divider { height: 1px; background: var(--border); margin-bottom: 16px; }
+.faq-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
 .faq-card-a { font-size: 13px; color: var(--muted); line-height: 1.7; }
 .faq-card-a strong { color: var(--off-white); }
 .faq-card-a .highlight-green { color: #4ade80; font-weight: 700; }
 
 /* ── WHATSAPP FLOAT ── */
-.wa-float {
-  position: fixed; bottom: 32px; right: 32px; z-index: 999;
-  display: flex; align-items: center; gap: 12px;
-  background: #25D366; color: #fff;
-  padding: 14px 22px 14px 18px; border-radius: 100px;
-  font-size: 14px; font-weight: 700;
-  box-shadow: 0 8px 32px rgba(37,211,102,0.35);
-  text-decoration: none; transition: transform 0.2s, opacity 0.3s;
-}
+.wa-float { position: fixed; bottom: 32px; right: 32px; z-index: 999; display: flex; align-items: center; gap: 12px; background: #25D366; color: #fff; padding: 14px 22px 14px 18px; border-radius: 100px; font-size: 14px; font-weight: 700; box-shadow: 0 8px 32px rgba(37,211,102,0.35); text-decoration: none; transition: transform 0.2s, opacity 0.3s; }
 .wa-float:hover { transform: translateY(-3px); }
 .wa-float svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
 .wa-pulse { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; background: #ff3b3b; border-radius: 50%; border: 2px solid var(--black); animation: wa-blink 1.8s infinite; }
@@ -238,29 +232,18 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
 .popup-note { font-size: 11px; color: #444; text-align: center; margin-top: 12px; }
 
 /* ── FOOTER ── */
-.footer-note {
-  padding: 36px 60px;
-  display: flex; align-items: center; justify-content: space-between;
-  border-top: 1px solid var(--border);
-}
+.site-footer { padding: 36px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
 .footer-logo { overflow: hidden; width: 44px; height: 32px; display: block; }
-.footer-logo img { height: 32px; width: auto; display: block; max-width: none; opacity: 0.45; filter: brightness(0) invert(1); }
+.footer-logo img { height: 32px; width: auto; display: block; max-width: none; opacity: 0.4; filter: brightness(0) invert(1); }
 .footer-links { display: flex; gap: 32px; align-items: center; }
-.footer-links a {
-  font-size: 14px; font-weight: 600;
-  color: #aaaaaa;
-  text-decoration: none;
-  letter-spacing: 0.03em;
-  transition: color 0.2s;
-}
+.footer-links a { font-size: 14px; font-weight: 600; color: #aaaaaa; text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
 .footer-links a:hover { color: var(--white); }
-/* Spacer destro per non far sovrapporre WA button */
-.footer-right-spacer { width: 200px; }
 </style>
 </head>
 <body>
 
-<nav>
+<!-- MAIN NAV con classe specifica .main-nav -->
+<header class="main-nav">
   <a href="#top" class="nav-logo"><img src="nclo-logo.png" alt="NCLO" /></a>
   <ul class="nav-links">
     <li><a href="#come-funziona">Come funziona</a></li>
@@ -268,7 +251,7 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
     <li><a href="#about">Chi sono</a></li>
   </ul>
   <a href="#form" class="nav-cta">Stima gratuita →</a>
-</nav>
+</header>
 
 <section class="hero" id="top">
   <div class="hero-left">
@@ -430,7 +413,7 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
     <div class="about-photo-wrap">
       <img src="nicolo-superhost.png" alt="Nicolò Mignacca Superhost" class="about-photo" />
       <div class="about-superhost-badge">
-        <img src="airbnb-logo.png" alt="Airbnb" style="height:18px;filter:none;" />
+        <img src="airbnb-logo.png" alt="Airbnb" style="height:16px;filter:none;" />
         <div class="about-superhost-text">Superhost ✓<small>Airbnb Verified</small></div>
       </div>
     </div>
@@ -453,7 +436,6 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
   </div>
 </section>
 
-<!-- WA float: si nasconde automaticamente quando il footer è visibile -->
 <a href="https://wa.me/39XXXXXXXXXX?text=Ciao%20Nicol%C3%B2%2C%20vorrei%20sapere%20quanto%20rende%20il%20mio%20immobile%20su%20Airbnb." class="wa-float" id="waBtn" target="_blank" rel="noopener">
   <div class="wa-pulse"></div>
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -480,13 +462,14 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
   </div>
 </div>
 
-<footer class="footer-note" id="site-footer">
+<!-- FOOTER: usa <footer> + classe .site-footer, NO tag <nav> interno -->
+<footer class="site-footer" id="site-footer">
   <a href="#top" class="footer-logo"><img src="nclo-logo.png" alt="NCLO" /></a>
-  <nav class="footer-links">
+  <div class="footer-links">
     <a href="https://wa.me/39XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
     <a href="#" target="_blank">Instagram</a>
     <a href="#" target="_blank">LinkedIn</a>
-  </nav>
+  </div>
 </footer>
 
 <script>
@@ -507,7 +490,7 @@ function handlePopupSubmit() {
   document.querySelector('.popup-box').innerHTML = '<div style="text-align:center;padding:20px 0"><div style="font-size:48px;margin-bottom:16px">✅</div><h3 style="font-size:22px;font-weight:800;margin-bottom:12px">Perfetto.</h3><p style="color:var(--muted);font-size:14px">Riceverai il PDF entro pochi minuti.</p></div>';
 }
 
-// Nascondi WA button quando il footer è visibile (evita sovrapposizione)
+// WA button: si nasconde quando il footer è visibile
 const waBtn = document.getElementById('waBtn');
 const footer = document.getElementById('site-footer');
 const obs = new IntersectionObserver(function(entries) {
