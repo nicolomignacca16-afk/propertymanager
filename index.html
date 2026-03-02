@@ -530,7 +530,7 @@ input[type="range"] { padding: 0; height: 4px; border-radius: 4px; border: none;
   <p class="section-sub">Risposte dirette. Altri dubbi? Scrivimi su WhatsApp.</p>
   <div class="faq-grid">
     <div class="faq-card"><div class="faq-card-q"><span class="objection">"E se l'ospite rompe qualcosa?"</span></div><div class="faq-divider"></div><div class="faq-card-a">Airbnb copre danni fino a <strong>3 milioni di euro</strong> con AirCover for Hosts. Per i casi fuori copertura uso una <strong>assicurazione integrativa</strong>. In 35+ immobili gestiti: zero sinistri non risolti.</div></div>
-    <div class="faq-card"><div class="faq-card-q"><span class="objection">"E se l'ospite rompe qualcosa?"</span></div><div class="faq-divider"></div><div class="faq-card-a">Sì. Serve la <strong>SCIA turistica</strong> e il <strong>codice CIR</strong>. Mi occupo io di tutto: presentazione SCIA, CIR, comunicazione alle autorità. <span class="highlight-green">Zero oneri per il proprietario.</span></div></div>
+    <div class="faq-card"><div class="faq-card-q"><span class="objection">"È legale a Milano?"</span></div><div class="faq-divider"></div><div class="faq-card-a">Sì. Serve la <strong>SCIA turistica</strong> e il <strong>codice CIR</strong>. Mi occupo io di tutto: presentazione SCIA, CIR, comunicazione alle autorità. <span class="highlight-green">Zero oneri per il proprietario.</span></div></div>
     <div class="faq-card"><div class="faq-card-q"><span class="objection">"Guadagno davvero di più?"</span></div><div class="faq-divider"></div><div class="faq-card-a">In media <strong>+60–120% rispetto a un 4+4</strong>, al netto dei costi. Case study: 200€/mese → 2.000€/mese su un bilocale reale. Compila il form: ti dico esattamente cosa aspettarti.</div></div>
   </div>
 </section>
@@ -615,6 +615,75 @@ function handlePopupSubmit() {
   if (!email || !email.includes('@')) { document.getElementById('popupEmail').style.borderColor='#e63946'; return; }
   document.querySelector('.popup-box').innerHTML = '<div style="text-align:center;padding:20px 0"><div style="font-size:48px;margin-bottom:16px">✅</div><h3 style="font-size:22px;font-weight:800;margin-bottom:12px">Perfetto.</h3><p style="color:var(--muted);font-size:14px">Riceverai il PDF entro pochi minuti.</p></div>';
 }
+const waBtn = document.getElementById('waBtn');
+const footer = document.getElementById('site-footer');
+const obs = new IntersectionObserver(function(entries) {
+  waBtn.style.opacity = entries[0].isIntersecting ? '0' : '1';
+  waBtn.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+}, { threshold: 0.1 });
+obs.observe(footer);
+</script>
+</body>
+</html>popup-email button').disabled = true;
+  document.querySelector('.popup-email button').textContent = '…';
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'pdf', email: email, timestamp: new Date().toISOString() })
+  })
+  .finally(function() {
+    document.querySelector('.popup-box').innerHTML =
+      '<div style="text-align:center;padding:20px 0">' +
+      '<div style="font-size:48px;margin-bottom:16px">✅</div>' +
+      '<h3 style="font-size:22px;font-weight:800;margin-bottom:12px">Perfetto.</h3>' +
+      '<p style="color:var(--muted);font-size:14px">Riceverai il PDF entro pochi minuti.</p>' +
+      '</div>';
+  });
+}
+
+// ── FORM PRINCIPALE: invio lead ───────────────────────────────────────────────
+function submitLeadForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('leadSubmitBtn');
+  const email = document.getElementById('f-email').value.trim();
+  if (!email) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Invio in corso…';
+
+  const payload = {
+    type: 'lead',
+    timestamp: new Date().toISOString(),
+    nome: document.getElementById('f-nome').value.trim(),
+    cognome: document.getElementById('f-cognome').value.trim(),
+    email: email,
+    whatsapp: document.getElementById('f-wa').value.trim(),
+    zona: document.getElementById('f-zona').value.trim(),
+    tipologia: document.getElementById('f-tipo').value,
+    stato_immobile: document.getElementById('f-stato').value,
+    rendita_attuale: document.getElementById('f-rendita').value + ' €',
+    source: 'landing_page'
+  };
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .finally(function() {
+    document.getElementById('leadForm').innerHTML =
+      '<div style="text-align:center;padding:32px 0">' +
+      '<div style="font-size:48px;margin-bottom:16px">✅</div>' +
+      '<h3 style="font-size:20px;font-weight:800;margin-bottom:10px">Ricevuto!</h3>' +
+      '<p style="color:var(--muted);font-size:14px;line-height:1.6">Ti rispondo entro 24h con la proiezione personalizzata.<br>Controlla anche WhatsApp.</p>' +
+      '</div>';
+  });
+}
+
+// ── WA float hide on footer ───────────────────────────────────────────────────
 const waBtn = document.getElementById('waBtn');
 const footer = document.getElementById('site-footer');
 const obs = new IntersectionObserver(function(entries) {
